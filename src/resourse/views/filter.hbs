@@ -1,0 +1,51 @@
+{{!-- filter --}}
+<form action="/book/filter" method="GET" id="filter" class="row">
+<div class="mt-4 col-8 ">
+    <div class="form-check form-check-inline mr-4">
+  <input class="form-check-input mr-2" type="checkbox"  value="Bottle" name="category" >
+  <label class="form-check-label" for="inlineCheckbox1">Bottle</label>
+</div>
+<div class="form-check form-check-inline mr-4">
+  <input class="form-check-input mr-2" type="checkbox"  name="category" value="Cup" >
+  <label class="form-check-label" for="inlineCheckbox2">Cup</label>
+</div>
+<div class="form-check form-check-inline mr-4">
+  <input class="form-check-input mr-2" type="checkbox" value="Metal" name="category" >
+  <label class="form-check-label" for="inlineCheckbox3">Metal</label>
+</div>
+<div class="form-check form-check-inline mr-4">
+  <input class="form-check-input mr-2" type="checkbox"  value="Plasitic" name="category" >
+  <label class="form-check-label" for="inlineCheckbox3">Plasitic</label>
+</div>
+</div>
+<div class="col-4 mt-4">
+  <button type="submit" class="btn btn-primary">Lọc</button>
+</div>
+</form>
+<div class="mt-4">
+    <div class="row " >
+        {{#each book}}
+        <div class="col-4 mb-4 " style="font-size:15px">
+               <div class="card" >
+                   <div class="img">
+                    <a href="/book/{{this.slug}}">
+                    <img class="card-img-top" src="/{{this.image.data}}" alt="{{this.name}}"> 
+                   </div>
+               <div class="row">
+                    <div class=" col-9">
+                </a>
+                   <a href="/book/{{this.slug}}">
+                    <h5 class="card-title">{{this.name}}</h5>
+                   </a>
+                <h5 class="card-title"style="font-size:15px">categories: {{this.category}}</h5>
+                <h5 class="card-title"style="font-size:15px">Rating: {{this.avgRating}}/10</h5>
+                </div>
+                <div class="card-price col-3">
+                    <p>{{this.price}} VND</p>
+                </div>
+               </div>
+                </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
