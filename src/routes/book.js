@@ -10,8 +10,8 @@ router.get('/detail',bookController.detail)
 router.post('/create',upload.single('image'),bookController.create)
 router.get('/create',bookController.index)
 // router.get('/create',bookController.index)
-router.delete('/:slug/delete',bookController.delete)
-router.post('/:slug/edit',bookController.edit)
+router.delete('/:slug',bookController.delete)
+router.patch('/:slug',bookController.edit)
 router.get('/:slug/edit',bookController.showedit)
 router.post('/:slug',bookController.rating)
 router.get('/:slug',bookController.detail)
@@ -56,7 +56,7 @@ module.exports = router;
  */
 /**
  * @swagger
- * /book/{slug}:
+ *  /book/{slug}:
  *   get:
  *    tags:
  *     - Books
@@ -92,22 +92,21 @@ module.exports = router;
  *       description: Rating book successfully
  *      500:
  *       description: Internal Server Error
- * /book/{slug}/edit:
- *   get:
+ *   delete:
  *    tags:
  *     - Books
- *    summary: page edit book
+ *    summary: delete a book by slug
  *    parameters:
- *     - name: slug
- *       in: path
- *       description: slug Book edit
- *       required: true
- *    responses:
+ *    - name: slug
+ *      in: path
+ *      required: true
+ *      description: slug of the book want delete
+ *    responses: 
  *      200:
- *       description: Book edit successfully
+ *        description: book deleted successfully
  *      404:
- *       description: Book not found   
- *   post:
+ *        description: book not found
+ *   patch:
  *    tags:
  *     - Books
  *    summary: edited book
@@ -127,21 +126,6 @@ module.exports = router;
  *       description: edited book successfully
  *      500:
  *       description: Internal Server Error
- * /book/{slug}/delete?_method="DELETE":
- *   delete:
- *    tags:
- *     - Books
- *    summary: delete a book by slug
- *    parameters:
- *    - name: slug
- *      in: path
- *      required: true
- *      description: slug of the book want delete
- *    responses: 
- *      200:
- *        description: book deleted successfully
- *      404:
- *        description: book not found
  * /book/create:
  *  post:
  *    tags:

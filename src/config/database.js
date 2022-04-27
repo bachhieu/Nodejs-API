@@ -4,7 +4,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 async function connect() {
     try{
-        await mongoose.connect('mongodb://localhost/my_database');
+        await mongoose.connect(MONGODB_URI);
         console.log('successful!!!!')
     }
     catch(err){

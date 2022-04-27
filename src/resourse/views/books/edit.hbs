@@ -1,6 +1,6 @@
 <div class="mt-4">
    
-<form method="POST" action="/book/{{this.slug}}/edit" >
+<form method="POST" action="/book/{{this.slug}}?_method=PATCH" >
   <div class="form-group">
     <label for="name">Tên sách</label>
     <input type="text" class="form-control" id="name" name="name" value="{{this.name}}">
@@ -13,11 +13,11 @@
     <label for="description">Mô tả</label>
     <textarea class="form-control" id="description" name="description" style="min-height: 100px;">{{this.description}}</textarea>  
   </div>
-  <div class="form-group">
+  {{!-- <div class="form-group">
     <img src="/{{this.image.data}}" alt="{{this.name}}"  style="width:150px;height:150px">
     <label for="image">Mô tả</label>
-    <input type="file" class="form-control" id="image" name="image" style="width: 300px ; height: 50px" ></input>  
-  </div>
+    <input type="file" class="form-control" id="image" name="image" style="width: 300px ; height: 50px" value="{{this.image.data}}" ></input>  
+  </div> --}}
   {{!-- <div class="form-group">
     <label for="videoId">Rating/10</label>
     <input type="text"  style="width:50px" class="form-control" id="videovideoId" name="videoId"></input>

@@ -343,12 +343,13 @@ const postItems = $('#post-items')
 const postItem = $('.post-item')
 
 postItems.addEventListener('click', showPostItem)
-// // hidden Item
-// function hiddenPostItem(){
-//     postItem.classList.remove('show')
-// }
-// const hiddenPostItems = $('#hidden-postItem')
+// hidden Item
+function hiddenPostItem(){
+    postItem.classList.remove('show')
+}
+const hiddenPostItems = $('#hidden-postItem')
 
-// hiddenPostItems.onsubmit = hiddenPostItem();
-    
+hiddenPostItems.onsubmit = hiddenPostItem();
+
+
     

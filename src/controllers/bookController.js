@@ -25,8 +25,8 @@ class bookController {
         })
         try {
         book.save()
+        // res.status(302).redirect('/')
         res.status(302).redirect('/')
-        // res.status(200).redirect('/')
         }
         catch {()=> res.status(400).json({error: 'error'})}
     }
@@ -34,15 +34,16 @@ class bookController {
     detail(req, res, next) {
         Book.findOne({slug: req.params.slug}).lean()
         .then(book => {
-            res.status(200).json(book)
+            res.status(200).render('books/detail',book)
+            // res.status(200).json(book)
         })
         .catch(() => res.status(404).render({error:'error'}))
 
     }
     showedit(req, res, next) {
         Book.findOne({ slug: req.params.slug})
-        .then(book =>res.status(200).json(book) )
-        // .then(book =>res.render('books/edit',book) )
+        // .then(book =>res.status(200).json(book) )
+        .then(book =>res.status(200).render('books/edit',book) )
         .catch(() => res.status(404).render({error: 'error'}))
     }
     edit(req, res, next){
@@ -57,21 +58,23 @@ class bookController {
         .then(book => {
             book.avgRating = req.body.avgRating
             book.save()
-            res.status(200).json(book)
-            // res.status(200).render('books/detail',book)
+            // res.status(200).json(book)
+            res.status(200).send(book)
         })
         .catch((next) => res.status(500).send({error: `Internal Server Error`}))
     }
     delete(req, res, next) {
+        console.log(req.params.slug)
         Book.findOneAndDelete({slug: req.params.slug})
-        .then((book) => res.status(200).json(book))
-        // .then(() => res.status(200).redirect('/'))
+        // .then((book) => res.status(200).json(book))
+        .then(() => res.status(202).redirect('/'))
         .catch((next) => res.status(500).send({error: `Internal Server Error`}))
         // console.log(req.params.slug)
         // res.redirect('/')
     }
     filter(req, res, next) {
         const categories = req.query.category || [];
+        // console.log(categories)
         const names = req.query.name || '';
 
         Book.find({$or: [
@@ -80,10 +83,9 @@ class bookController {
         ]})
         .then((book) =>{
         // console.log(book)
-            res.status(200).json(book)
-            // console.log(res.json(book))
+            // res.status(200).send(book);
             
-            // res.status(200).render('filter',{book})
+            res.status(200).send({book})
         })
         .catch (() => res.status(404).send({error: 'Book not found'}))
     }
