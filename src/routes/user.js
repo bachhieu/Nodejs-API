@@ -1,6 +1,7 @@
 const userController = require('../controllers/userController')
 const express = require('express')
 const router = express.Router();
+const auth = require('../middleware/auth')
 /**
 *@swagger
 * components:
@@ -94,5 +95,5 @@ router.get('/login',userController.indexLogin)
 */
 router.post('/register',userController.register)
 router.get('/register',userController.indexRegister)
-
+router.get('/welcome',auth,userController.welcome)
 module.exports = router;

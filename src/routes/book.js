@@ -3,6 +3,7 @@ const upload = require('../middleware/storage')
 const express = require('express')
 const router = express.Router();
 
+router.get('/list',bookController.list)
 
 router.get('/filter',bookController.filter)
 // router.get('/edit',bookController.edit)

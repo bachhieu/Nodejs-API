@@ -4,6 +4,7 @@ class HomeController {
         Book.find().lean()
         .then(book => {
             res.status(200).render('home',{book})
+            console.log("the API books")
         })
         .catch(()=> res.status(500).send({error:'Internal Server Error'}))
     }

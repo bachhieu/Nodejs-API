@@ -1,7 +1,10 @@
 const Book = require('../model/book')
 const path = require('path')
 const book = require('../model/book')
-
+// const {ExportToCsv} = require('export-to-csv')
+const csvcreator = require('json2csv')
+const fs = require('fs')
+const fastcsv = require('fast-csv')
 class bookController {
     index(req, res, next) {
       try {
@@ -88,6 +91,42 @@ class bookController {
             res.status(200).send({book})
         })
         .catch (() => res.status(404).send({error: 'Book not found'}))
+    }
+     list(req, res, next){
+        Book.find({},{_id:0,name:1,price:1,description:1}).lean()
+        .then( async books=>{
+            let arr= []
+            const headers = Object.keys(books[0])
+            arr.push(headers)
+            books.forEach(book=>{
+                arr.push(Object.values(book))
+            })
+            arr = arr.join('\r\n')
+            fs.writeFile('src/public/output.csv',arr,(err,data)=>{
+                if(err){
+                    return console.log(err)
+                }
+            })
+            return res.status(200).attachment('src/public/output.csv').send(arr)
+            
+            // let json2csv =csvcreator.parse(books)
+            // console.log(typeof books) 
+            // console.log(typeof json2csv)
+            // return res.status(200).send(json2csv)
+            // let ws = fileStyle.createWriteStream("src/public/data.csv")
+            // fastcsv
+            // .write(books,{headers:true})
+            // .on("finish", () =>{
+            //     console.log('done')
+            // })
+            // .on("end",data=>{
+            //     res.send(data)
+            // })
+            // .pipe(ws)
+           
+            // // res.send(ws)
+        })
+        .catch(next)
     }
 }
 

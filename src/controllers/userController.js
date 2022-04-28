@@ -55,11 +55,14 @@ class userController {
               // save user token
               oldUser.token = token;
               oldUser.save();
-                res.status(302).redirect('/')
+                res.status(302).send(token)
         }else {
             return res.status(404).send(`please create User   <a href="/user/register">register</a>`)
         }
     }
+    welcome(req, res, next){
+        res.status(200).send('welcome')
+    };
 }
 
 module.exports = new userController;
