@@ -1,7 +1,10 @@
 const userController = require('../controllers/userController')
 const express = require('express')
 const router = express.Router();
-const auth = require('../middleware/auth')
+const {verifyToken} = require('../middleware/auth')
+const Validator = require('../middleware/validator');
+const {authRole} = require('../middleware/roles')
+
 /**
 *@swagger
 * components:
@@ -59,7 +62,7 @@ const auth = require('../middleware/auth')
  *  
 */
 
-router.post('/login',userController.login)
+router.post('/login',Validator('login'),userController.login)
 router.get('/login',userController.indexLogin)
 /**
  * @swagger
@@ -93,7 +96,9 @@ router.get('/login',userController.indexLogin)
  *      description: Internal Server Error
  *  
 */
+router.get('/edit',verifyToken,userController.edit)
+router.get('/profile',verifyToken,userController.detail)
 router.post('/register',userController.register)
 router.get('/register',userController.indexRegister)
-router.get('/welcome',auth,userController.welcome)
+router.get('/welcome',verifyToken,userController.welcome)
 module.exports = router;

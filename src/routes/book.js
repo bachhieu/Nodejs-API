@@ -2,20 +2,22 @@ const bookController = require('../controllers/bookController')
 const upload = require('../middleware/storage')
 const express = require('express')
 const router = express.Router();
+const {verifyToken} = require('../middleware/auth')
+const {authRole} = require('../middleware/roles')
+
 
 router.get('/list',bookController.list)
 
 router.get('/filter',bookController.filter)
 // router.get('/edit',bookController.edit)
-router.get('/detail',bookController.detail)
-router.post('/create',upload.single('image'),bookController.create)
-router.get('/create',bookController.index)
-// router.get('/create',bookController.index)
-router.delete('/:slug',bookController.delete)
-router.patch('/:slug',bookController.edit)
-router.get('/:slug/edit',bookController.showedit)
-router.post('/:slug',bookController.rating)
-router.get('/:slug',bookController.detail)
+router.get('/detail',verifyToken,bookController.detail)
+router.post('/create',verifyToken,upload.single('image'),bookController.create)
+router.get('/create',verifyToken,bookController.index)
+router.delete('/:slug',verifyToken,authRole,bookController.delete)
+router.patch('/:slug',verifyToken,bookController.edit)
+router.get('/:slug/edit',verifyToken,authRole,bookController.showedit)
+router.post('/:slug',verifyToken,bookController.rating)
+router.get('/:slug',verifyToken,bookController.detail)
 // router.get('/register',bookController.register)
 
 module.exports = router;

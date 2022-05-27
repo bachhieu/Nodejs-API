@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
+const { Schema } = mongoose;
 mongoose.plugin(slug);
 
 const bookSchema = new mongoose.Schema({
@@ -10,7 +11,7 @@ const bookSchema = new mongoose.Schema({
         data: Buffer,
         contentType: String
     },
-    rating:{type: Number},
+    authorID: { type: Schema.Types.ObjectId, ref: 'user' },
     slug: {type: String, slug: "name" },
     avgRating: {type: Number, default: 0},
     category: {type: Array, }

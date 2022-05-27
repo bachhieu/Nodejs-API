@@ -1,6 +1,7 @@
 const homeRouter = require('../controllers/homeController')
 const express = require('express')
 const router = express.Router();
+const {verifyToken} = require('../middleware/auth')
 /**
  * @swagger
  * components:
@@ -86,6 +87,6 @@ router.post('/',homeRouter.index)
  *           $ref : '#/components/schema/book'
  * 
  */
-router.get('/',homeRouter.index)
+router.get('/',verifyToken,homeRouter.index)
 
 module.exports = router;

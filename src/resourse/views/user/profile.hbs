@@ -1,0 +1,47 @@
+
+
+<div class="row mt-4 " >
+    {{!-- <div class="col-3">
+    </div> --}}
+        <img class="col-4 rating_slug"style="width: 300px;height: 309px;" src="{{user.avatar}}" alt="{{user.name}}" id="{{user.name}}">
+    <div class="col-8">
+       
+        <div class="body-rating">
+            <p class="name-product">Name: {{user.fullname}}</p>
+            <p class="price-product">Gender:{{user.gender}}</p>
+            <a class="des-product" tel="{{user.tel}}">tel:{{user.tel}}</a>
+        </div>
+        <div class="row mt-4">
+            <div class="col-8">
+                <p class="category">more information: {{user.information}}</p>
+            </div>
+            <div class="col-4">
+               {{!-- <form style="display:inline-block" action="/book/{{user.slug}}?_method=DELETE" method="POST"><button class="btn btn-primary">DELETE</button></form> --}}
+               <a href="/book/{{user.slug}}/edit" class="btn btn-primary" > Edit</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+{{#each books}}
+<div class="rating row">
+  <div class="form-group col-9">
+    <label for="rating">Name book: 
+      {{!-- <input class="form-control" type="text"  style="width:50px; display:inline-block" id="rating" name="avgRating" placeholder="{{this}}"></input> --}}
+      {{this.name}}</label>
+  </div>
+  <div class="col-3">
+      <form style="display:inline-block" action="/book/{{this.slug}}?_method=DELETE" method="POST"><button class="btn btn-primary mr-4">DELETE</button></form>
+      <a href="/book/{{this.slug}}/edit" class="btn btn-primary" > Edit</a>
+  </div>
+  {{!-- <div class="form-group">
+    <label for="description">review</label>
+    <textarea class="form-control"  id="description" style="min-height: 100px" name="description" placeholder="your review message" ></textarea>  
+  </div>
+    <button type="submit" class="submit_rating">Submit your rating</button>
+</div> --}}
+</div>
+<hr>
+{{/each}}
+

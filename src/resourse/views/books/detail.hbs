@@ -3,24 +3,25 @@
 <div class="row mt-4 " >
     {{!-- <div class="col-3">
     </div> --}}
-        <img class="col-4 rating_slug" src="/{{this.image.data}}" alt="{{this.name}}" id="{{this.slug}}">
+        <img class="col-4 rating_slug" src="/{{book.image.data}}" alt="{{book.name}}" id="{{book.slug}}">
     <div class="col-8">
-       
         <div class="body-rating">
-            <p class="name-product">{{this.name}}</p>
-            <p class="price-product">{{this.price}} VND</p>
-            <p class="des-product">{{this.description}}</p>
+            <p class="name-product">{{book.name}}</p>
+            <p class="price-product">{{book.price}} VND</p>
+            <p class="des-product">{{book.description}}</p>
         </div>
         <div class="row">
             <div class="col-8">
-                <p class="rating">Rating: {{this.avgRating}}/10</p>
-                <p class="category">categories: {{this.category}}</p>
+                <p class="rating">Rating: {{book.avgRating}}/10</p>
+                <p class="category">categories: {{book.category}}</p>
             </div>
             <div class="col-4">
-               <form style="display:inline-block" action="/book/{{this.slug}}?_method=DELETE" method="POST"><button class="btn btn-primary">DELETE</button></form>
-               <a href="/book/{{this.slug}}/edit" class="btn btn-primary" > Edit</a>
-                
+               <form style="display:inline-block" action="/book/{{book.slug}}?_method=DELETE" method="POST"><button class="btn btn-primary">DELETE</button></form>
+               <a href="/book/{{book.slug}}/edit" class="btn btn-primary" > Edit</a>  
             </div>
+        </div>
+        <div class="nt-4">
+            <p class="rating">Author: {{book.authorID.fullname}}</p>
         </div>
     </div>
 </div>
@@ -28,7 +29,7 @@
 <div class="rating">
   <div class="form-group">
     <label for="rating">Your rating: 
-      <input class="form-control" type="text"  style="width:50px; display:inline-block" id="rating" name="avgRating" ></input>
+      <input class="form-control" type="text"  style="width:50px; display:inline-block" id="rating" name="avgRating" placeholder="{{this.avgRating}}"></input>
       /10</label>
   </div>
   <div class="form-group">
